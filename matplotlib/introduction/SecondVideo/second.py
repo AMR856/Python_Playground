@@ -18,7 +18,7 @@ for response in programming_langauges:
     my_counter.update(response.split(';'))
 
 languages = []
-popularity  =[]
+popularity  = []
 
 for item in my_counter.most_common(15):
     languages.append(item[0])
