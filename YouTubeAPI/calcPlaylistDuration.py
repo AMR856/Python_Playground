@@ -35,7 +35,7 @@ hours_pattern = re.compile(r'(\d+)H')
 minutes_pattern = re.compile(r'(\d+)M')
 seconds_pattern = re.compile(r'(\d+)S')
 
-print(playlist_ids)
+# print(playlist_ids)
 while True:
     playlist_request = youtube.playlistItems().list(
         part='contentDetails',
@@ -94,3 +94,8 @@ minutes, seconds = divmod(total_seconds, 60)
 hours, minutes = divmod(minutes, 60)
 
 print(f"{hours} Hour, {minutes} Minutes, {seconds} Seconds")
+
+"""
+Some parts of this code are not so essential like the channel request
+the channel request will only help you to get the playlist ids and then use them to get the required time
+"""
