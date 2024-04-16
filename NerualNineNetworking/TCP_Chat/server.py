@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 import threading
 import socket
+import sys
+
 
 host = '127.0.0.1'
-port = 55555
-
+port = int(sys.argv[1])
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((host, port))
 server.listen()
@@ -41,7 +42,7 @@ def receive():
         clients.append(client)
 
         print(f"Nickname of the client is {nickname}")
-        broadcast(f"{nickname} joined!! Losers!".encode('ascii'))
+        broadcast(f"{nickname} joined!! Losers!\n".encode('ascii'))
         client.send("You're connected to the server! Dude\n".encode('ascii'))
 
         my_thread = threading.Thread(target=handle, args=(client, ))
