@@ -3,14 +3,18 @@ import os
 from googleapiclient.discovery import build
 import re
 from datetime import timedelta
-import sys
+# import sys
 
 api_key = os.environ.get("API_KEY")
 
 youtube = build('youtube', 'v3', developerKey=api_key)
-# channel_id = str(sys.argv[2])
-# playlist_number = int(sys.argv[3]) % 5
-# channelId = 'UCxMsgwldMZiuFTD6jjv32yQ'
+
+"""
+    channel_id = str(sys.argv[2])
+    playlist_number = int(sys.argv[3]) % 5
+    channelId = 'UCxMsgwldMZiuFTD6jjv32yQ'
+
+
 pl_request = youtube.playlists().list(
     part='contentDetails, snippet',
     channelId = "UCxMsgwldMZiuFTD6jjv32yQ"
@@ -28,7 +32,7 @@ for value in pl_response['items']:
         if key == 'id':
             playlist_ids.append(val)
 
-
+"""
 total_seconds = 0
 next_page_token = None
 hours_pattern = re.compile(r'(\d+)H')
@@ -39,7 +43,7 @@ seconds_pattern = re.compile(r'(\d+)S')
 while True:
     playlist_request = youtube.playlistItems().list(
         part='contentDetails',
-        playlistId = "PLVblLQwRzdW2seSySMHxHZlEEKaP84H4G",
+        playlistId = "PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS",
         maxResults=50,
         pageToken=next_page_token
     )
@@ -93,9 +97,4 @@ total_seconds = int(total_seconds)
 minutes, seconds = divmod(total_seconds, 60)
 hours, minutes = divmod(minutes, 60)
 
-print(f"{hours} Hour, {minutes} Minutes, {seconds} Seconds")
-
-"""
-Some parts of this code are not so essential like the channel request
-the channel request will only help you to get the playlist ids and then use them to get the required time
-"""
+print(f"{hours} Hours, {minutes} Minutes, {seconds} Seconds")
